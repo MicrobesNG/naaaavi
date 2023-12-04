@@ -42,7 +42,6 @@ def cli():
     validate_parser.add_argument("--checksum", required=True)
 
     args = parser.parse_args()
-    #print("Hey listen!")
 
     ok = True
     alphabet = None
@@ -58,7 +57,10 @@ def cli():
         sys.stderr.write("[FAIL] Checksum '%s' not in checksums\n" % args.checksum)
         ok = False
     else:
-        checksum = NAVI_CHECKSUMS[args.checksum.lower()]
+        if args.checksum:
+            checksum = NAVI_CHECKSUMS[args.checksum.lower()]
+        else:
+            checksum = None
 
     rejectors_d = {}
     if hasattr(args, "rejectors"):
